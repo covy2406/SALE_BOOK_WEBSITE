@@ -1,0 +1,34 @@
+.product {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .product img {
+    max-width: 100%;
+  }
+  
+  .product-name {
+    margin-top: 10px;
+  }
+  
+  .product-price {
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  
+  .add-to-cart-btn {
+    background-color: #008CBA;
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .view-product-link {
+    display: block;
+    margin-top: 10px;
+    color: #008CBA;
+  }
+  
+  

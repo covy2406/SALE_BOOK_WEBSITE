@@ -1,0 +1,27 @@
+#footer{
+    padding: 64px 16px;
+    text-align: center;
+}
+
+#footer .social-list{
+    font-size: 24px;
+}
+
+#footer .social-list a{
+    color: #757575;
+    text-decoration: none;
+}
+
+#footer .social-list a:hover{
+    color: #ccc;
+}
+
+#footer .copyright{
+    color: #757575;
+    margin-top: 15px;
+}
+
+.card-img-top {
+    max-width: 200px;
+    max-height: 200px;
+}
