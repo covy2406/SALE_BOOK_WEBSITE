@@ -105,7 +105,7 @@
                     <a class="nav-link " href="#footer">Contact</a> <!--disabled-->
                   </li>
                 </ul>
-                <form class="d-flex" role="search">
+                <form class="d-flex" role="search" method=POST, action="{% url 'search' %}">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
@@ -164,6 +164,9 @@
 
         <!--Giao diện đăng nhập-->
         {% block login %}{% endblock login %}
+
+        <!--Kết quả sản phẩm sau khi search-->
+        {% block search %}{% endblock search %}
 
         <!--Footer-->
         <div id="footer">

@@ -1,0 +1,11 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block search %}
+  {% comment %} <form method="POST" action="">{% csrf_token %}
+    {% csrf_token %}
+    {{ form.username }}
+    <button type="submit">Register</button>
+  </form> {% endcomment %}
+  <h5 class="justify-content-center align-items-center">Search results for product</h5>
+  
+{% endblock search %}

@@ -7,13 +7,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 # Create your views here.
+
+def search(request):
+    return render(request, 'app/search.html')
+
 def register(request):
     form = CreateUserForm()
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-    context = {'form': form}
+            return redirect('login')
+    context = {'form': form}    
     return render(request, 'app/register.html', context)
 
 def loginPage(request):
@@ -22,7 +27,7 @@ def loginPage(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password) # kiểm tra tính xác thực ủa username, pass có đúng hay ko
+        user = authenticate(request, username=username, password=password) # kiểm tra tính xác thực của username, pass có đúng hay ko
         if user is not None:
             login(request, user)
             return redirect('home')
