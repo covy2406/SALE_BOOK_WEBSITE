@@ -26,14 +26,18 @@ def loginPage(request):
         if user is not None:
             login(request, user)
             return redirect('home')
-        else:
+        else: # neu tai khoan dang nhap ko dung dua ra thong bao
             messages.info(request, 'user or password incorrect !')
     context = {}
     return render(request, 'app/login.html', context)
 
+def logoutPage(request):
+    logout(request)
+    return redirect('login')
+
 def home(request):
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer = request.user
         order,created = Order.objects.get_or_create(customer=customer,complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
@@ -47,7 +51,7 @@ def home(request):
 
 def cart(request):
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer = request.user
         order,created = Order.objects.get_or_create(customer=customer,complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
@@ -60,7 +64,7 @@ def cart(request):
 
 def checkout(request):
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer = request.user
         order,created = Order.objects.get_or_create(customer=customer,complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
@@ -75,7 +79,7 @@ def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
     action = data['action']
-    customer = request.user.customer
+    customer = request.user
     product = Product.objects.get(id = productId)
     order,created = Order.objects.get_or_create(customer=customer,complete=False)
     orderItem, created = OrderItem.objects.get_or_create(order = order, product = product)

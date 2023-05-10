@@ -111,7 +111,12 @@
                 </form>
               </div>
               <!--user icon-->
-              <ul class="navbar-nav me-auto mx-4 my-lg-0">
+              <ul class="navbar-nav me-auto mx-4 my-lg-0 d-flex">
+                <div class="form-inline mx-4 my-lg-0">
+                  <span>hello! {{request.user}}</span>
+                  {% comment %} <span><a href="{% url 'logout' %}">Logout</a></span> {% endcomment %}
+                </div>
+
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" style="color: black" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> User
@@ -119,7 +124,7 @@
                   <ul class="dropdown-menu nav-item">
                     <li><a class="dropdown-item" href="{% url 'login' %}">Đăng nhập</a></li>
                     <li><a class="dropdown-item" href="{% url 'register' %}">Đăng ký</a></li>
-                    <li><a class="dropdown-item" href="#">Thoát</a></li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Thoát</a></li>
                   </ul>
                 </li>
       
