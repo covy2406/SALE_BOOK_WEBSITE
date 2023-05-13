@@ -59,7 +59,7 @@
                 }
             }
             return cookieValue;
-        }
+          }
         const csrftoken = getCookie('csrftoken');
         </script>
         
@@ -105,8 +105,9 @@
                     <a class="nav-link " href="#footer">Contact</a> <!--disabled-->
                   </li>
                 </ul>
-                <form class="d-flex" role="search" method=POST, action="{% url 'search' %}">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex" role="search" method="POST" action="{% url 'search' %}">
+                  {% csrf_token %}
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name = "searched">
                   <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
               </div>
@@ -166,7 +167,7 @@
         {% block login %}{% endblock login %}
 
         <!--Kết quả sản phẩm sau khi search-->
-        {% block search %}{% endblock search %}
+        {% block search_content %}{% endblock search_content %}
 
         <!--Footer-->
         <div id="footer">
