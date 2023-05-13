@@ -5,11 +5,29 @@ import json
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+# from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
 def search(request):
-    return render(request, 'app/search.html')
+    if request.method == "POST":
+        searched = request.POST['searched']
+        keys = Product.objects.filter(name__contains = searched)
+    # products = get_object_or_404(Product, pk=keys)
+    # if not products:
+    #     return HttpResponse("Sản phẩm không tồn tại")
+    if request.user.is_authenticated:
+        customer = request.user
+        order,created = Order.objects.get_or_create(customer=customer,complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_items' :0, 'get_cart_total': 0}
+        cartItems = order['get_cart_items']
+    products = Product.objects.all()
+    # context= {'products': products, 'cartItems': cartItems}
+    return render(request, 'app/search.html', {"searched":searched,"keys":keys, 'products': products, 'cartItems': cartItems})
 
 def register(request):
     form = CreateUserForm()
