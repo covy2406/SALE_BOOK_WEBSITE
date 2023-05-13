@@ -1,11 +1,26 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block search %}
+{% block search_content %}
   {% comment %} <form method="POST" action="">{% csrf_token %}
     {% csrf_token %}
     {{ form.username }}
     <button type="submit">Register</button>
   </form> {% endcomment %}
-  <h5 class="justify-content-center align-items-center">Search results for product</h5>
-  
-{% endblock search %}
+    <h5 class="row d-flex align-items-center justify-content-center mt-4">Search results for product {{searched}}</h5>
+    <br>
+    <div class= "row d-flex align-items-stretch justify-content-center" style="width: 100% margin-left: 5px!important">
+      {% for product in keys %}
+      <div class="col-sm-2 mb-4 col-hover"> <!--col-md-2-->
+        <img class="thumbnail img-fluid" src= "{{product.ImageURL}}"> <!--card-img-top-->
+        <div class="box-element product">
+          <h8 class="card-text">{{product.name}}</h8><br>
+          <h13>$ {{product.price | floatformat:2}}</h13>
+          <hr>
+          <button type="button" data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to cart</button>
+          <button type="button" class="btn btn-outline-success">View</button>
+        </div>
+      </div>
+      {% endfor %}
+      <br><br><br>
+    </div>
+{% endblock search_content %}
