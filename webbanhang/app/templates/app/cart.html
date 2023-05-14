@@ -42,8 +42,10 @@
 						{% comment %} <img class="chg-quantity" src="{% static  'app/images/hinh bo xung/arrow-up.png' %}">
 						<img class="chg-quantity" src="{% static  'app/images/hinh bo xung/arrow-down.png' %}"> {% endcomment %}
 						<p class="quantity">{{item.quantity}}</p>
-						<i data-product = {{item.product.id}} data-action = 'add' class="chg-quantity fa-solid fa-angle-up update-cart"></i>
-						<i data-product = {{item.product.id}} data-action = 'remove' class="chg-quantity fa-solid fa-angle-down update-cart"></i>
+						{% comment %} <img data-product = {{item.product.id}} data-action = "add" class="chg-quantity update-cart" src="{% static  'app/images/hinh bo xung/arrow-up.png' %}">
+						<img data-product = {{item.product.id}} data-action = "remove" class="chg-quantity update-cart" src="{% static  'app/images/hinh bo xung/arrow-down.png' %}"> {% endcomment %}
+						<i data-product = {{item.product.id}} data-action = "add" class="chg-quantity fa-solid fa-angle-up update-cart"></i>
+						<i data-product = {{item.product.id}} data-action = "remove" class="chg-quantity fa-solid fa-angle-down update-cart"></i>
 					</div>
 				</div>
 				<div style="flex:1"><p>${{item.get_total}}</p></div>
