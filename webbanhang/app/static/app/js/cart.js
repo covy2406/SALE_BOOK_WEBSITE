@@ -33,5 +33,5 @@ function updateUserOrder(productId, action)
 
     })
     .then((response) => {return response.json()})
-    .then((data) => {return console.log('data'), location.reload})
+    .then((data) => {return console.log('data', data), location.reload})
 }
