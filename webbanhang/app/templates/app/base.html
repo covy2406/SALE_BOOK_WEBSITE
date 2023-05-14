@@ -113,19 +113,21 @@
               </div>
               <!--user icon-->
               <ul class="navbar-nav me-auto mx-4 my-lg-0 d-flex">
-                <div class="form-inline mx-4 my-lg-0">
+                {% comment %} <div class="form-inline mx-3 my-lg-0" style = "visibility: {{user_login}}">
                   <span>hello! {{request.user}}</span>
-                  {% comment %} <span><a href="{% url 'logout' %}">Logout</a></span> {% endcomment %}
-                </div>
+                  <span class="mx-3 my-lg-0"><a class="dropdown-item" style="color: blue" href="{% url 'logout' %}">Logout</a></span>
+                  <span><a href="{% url 'logout' %}">Logout</a></span>
+                </div> {% endcomment %}
 
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" style="color: black" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-user"></i> User
+                    {% comment %} <i class="fa-solid fa-user"></i>  {% endcomment %}
+                    hello! {{request.user}}
                   </a>
-                  <ul class="dropdown-menu nav-item">
-                    <li><a class="dropdown-item" href="{% url 'login' %}">Đăng nhập</a></li>
-                    <li><a class="dropdown-item" href="{% url 'register' %}">Đăng ký</a></li>
-                    <li><a class="dropdown-item" href="{% url 'logout' %}">Thoát</a></li>
+                  <ul class="dropdown-menu nav-item mx-2">
+                    <li style="visibility: {{user_not_login}}"><a class="dropdown-item" href="{% url 'login' %}">Đăng nhập</a></li>
+                    <li style="visibility: {{user_not_login}}"><a class="dropdown-item" href="{% url 'register' %}">Đăng ký</a></li>
+                    <li><a class="dropdown-item" style="visibility: {{user_login}}" href="{% url 'logout' %}">Thoát</a></li>
                   </ul>
                 </li>
       
@@ -136,7 +138,7 @@
                   <a class="nav-link" href=#>Đăng ký</a>
                 </li> {% endcomment %}
               </ul>
-              <div class="form-inline mx-4 my-lg-0">                
+              <div class="form-inline mx-3 my-lg-0">                
                 <a id="cart-icon" style="color: black" href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
                 <p id="cart-total">{{cartItems}}</p>
               </div>
