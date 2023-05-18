@@ -1,83 +1,52 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+import uuid
+import datetime
+# Code  Model Trọng
 
-
-# Create your models here.
-
-# change form resigter django
-class CreateUserForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
-
-
-# class Customer(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.SET_NULL,null=True,blank=False)
-#     name = models.CharField(max_length=200,null=True)
-#     email = models.CharField(max_length=200,null=True)
-
-#     def _str_(self):
-#         return self.name
+class Persons(models.Model):
+    Id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    Name = models.CharField(max_length=100)
+    Phone = models.CharField(max_length=20,unique=True)
+    Address = models.CharField(max_length=300)
+    DateOfBirth = models.DateField(default=datetime.date.today)
+    Password = models.CharField(max_length=20)
+    Status = models.BooleanField(default=False)
     
-class Product(models.Model):
-    name = models.CharField(max_length=200,null=True)
-    # price = models.FloatField()
-    price = models.FloatField()
-    digital = models.BooleanField(default=False,null=True,blank=False)
-    image = models.ImageField(null=True,blank=True)
+    def __str__(self):
+        return f"{self.Id} {self.Name} {self.Phone} {self.Address} {self.DateOfBirth}  {self.Password}"
+
+class Categories(models.Model):
+    Id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    Name = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.name
-    @property
-    def ImageURL(self):
-        try:
-            url = self.image.url
-        except:
-            url = ''
-        return url
-
-class Order(models.Model):
-    customer = models.ForeignKey(User,on_delete=models.SET_NULL,blank=True,null=True)
-    date_order = models.DateTimeField(auto_now_add=True)
-    complete = models.BooleanField(default=False,null=True,blank=False)
-    transaction_id = models.CharField(max_length=200,null=True)
+        return f"{self.Id} {self.Name}"
+    
+class Books(models.Model):
+    Id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    Name = models.CharField(max_length=300)
+    Author = models.CharField(max_length=100)
+    Language = models.CharField(max_length=100)
+    Country = models.CharField(max_length=100)
+    CategoryId = models.ForeignKey(Categories, on_delete=models.PROTECT)
+    PublishDate = models.DateField(default=datetime.date.today)
+    Status = models.BooleanField(default=False)
+    Price = models.IntegerField()
+    EntryPrice = models.IntegerField()
+    Quantity = models.IntegerField()
+    Image = models.ImageField(upload_to='images')
+    Description = models.CharField(max_length=1000)
+    SellNumber= models.IntegerField(default=0)
+    # Time = models.DateTimeField(default=datetime.date.today.now)
 
     def __str__(self):
-        return str(self.id)
+        return f"{self.Id} {self.Name} {self.Author} {self.Language} {self.Country} {self.CategoryId} {self.PublishDate} {self.Status} {self.Price} {self.EntryPrice} {self.Quantity} {self.Image} {self.Description}"
     
-    @property
-    def get_cart_items(self):
-        orderitems = self.orderitem_set.all()
-        total = sum([item.quantity for item in orderitems])
-        return total
-
-    @property
-    def get_cart_total(self):
-        orderitems = self.orderitem_set.all()
-        total = sum([item.get_total for item in orderitems])
-        return total
-
-class OrderItem(models.Model):
-    product = models.ForeignKey(Product,on_delete=models.SET_NULL,blank=True,null=True)
-    order = models.ForeignKey(Order,on_delete=models.SET_NULL,blank=True,null=True)
-    quantity = models.IntegerField(default=0,null=True,blank=False)
-    date_added = models.DateTimeField(auto_now_add=True)
-    
-    @property
-    def get_total(self):
-        total = self.product.price * self.quantity
-        return total
-    
-class ShippingAddress(models.Model):
-    customer = models.ForeignKey(User,on_delete=models.SET_NULL,blank=True,null=True)
-    order = models.ForeignKey(Order,on_delete=models.SET_NULL,blank=True,null=True)
-    address = models.CharField(max_length=200,null=True)
-    city = models.CharField(max_length=200,null=True)
-    state = models.CharField(max_length=200,null=True)
-    mobile = models.CharField(max_length=10,null=True)
-    date_added = models.DateTimeField(auto_now_add=True) 
+class Carts(models.Model):
+    Id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    PersonId = models.ForeignKey(Persons, on_delete=models.PROTECT)
+    BookId = models.ForeignKey(Books, on_delete=models.PROTECT)
+    Quantity = models.IntegerField()
 
     def __str__(self):
-        return self.address
-    
+        return f"{self.Id} {self.PersonId} {self.BookId} {self.Quantity}"

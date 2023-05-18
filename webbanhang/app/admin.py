@@ -1,9 +1,11 @@
 from django.contrib import admin
 from .models import *
 
-# Register your models here.
-# admin.site.register(Customer)
-admin.site.register(Product)
-admin.site.register(OrderItem)
-admin.site.register(Order)
-admin.site.register(ShippingAddress)
+class MyModelBooks(Books):
+    exclude = ('Time')
+
+admin.site.register(MyModelBooks)
+admin.site.register(Persons)
+admin.site.register(Books)
+admin.site.register(Carts)
+admin.site.register(Categories)

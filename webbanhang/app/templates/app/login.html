@@ -1,45 +1,39 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block login %}
-  {% comment %} <form method="POST" action="">{% csrf_token %}
-    {% csrf_token %}
-    {{ form.username }}
-    <button type="submit">Register</button>
-  </form> {% endcomment %}
-  <section class="h-100 bg-dark">
+  <section style="background-color: rgb(105, 105, 105);">
     
-    <div class="container py-5 h-100">
+    <div class="container py-5">
       
-      <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="row d-flex justify-content-center align-items-center">
         <div class="col">
           <div class="card card-registration my-4">
             <div class="row g-0">
               <div class="col-xl-6 d-none d-xl-block">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                <img src="https://haycafe.vn/wp-content/uploads/2022/03/anh-sach.jpg"
                   alt="Sample photo" class="img-fluid"
-                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                  style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; height: 553px" />
               </div>
 
               <div class="col-xl-6">
                 <div class="card-body p-md-5 text-black">
-                  <h3 class="mb-5 text-uppercase">Customer Login Form</h3>
+                  <h3 class="mb-5 text-uppercase">Đăng nhập</h3>
     
-                  <form method="POST" action="">{% csrf_token %}
+                  <form method="POST" action='{% url "home" %}'>{% csrf_token %}
                     <div class="form-outline mb-2">
-                      <label class="form-label" for="form3Example9">User name</label>
-                      <input type="text" name="username" id="form3Example9" class="form-control form-control-lg" />
+                      <label class="form-label" for="form3Example9">Số điện thoại</label>
+                      <input type="text" name="Phone" id="form3Example9" class="form-control form-control-lg" required/>
                     </div>
     
                     <div class="form-outline mb-2">
-                      <label class="form-label" for="form3Example99">Password</label>
-                      <input type="text" name="password" id="form3Example9" class="form-control form-control-lg" />
+                      <label class="form-label" for="form3Example99">Mật khẩu</label>
+                      <input type="Password" name="PasswordLG" id="form3Example9" class="form-control form-control-lg" required/>
                     </div>
 
-                    <p class="text-center text-muted mt-5 mb-0">Do you already have an account? 
+                    <p class="text-center text-muted mt-5 mb-0">Bạn đã có tài khoản chưa?
                       <a href="{% url 'register' %}"
-                      class="fw-bold text-body"><u>Register here</u></a>
+                      class="fw-bold text-body"><u>Đăng ký</u></a>
                     </p>
-                    {% comment %} Đưa ra thông báo khi nhập sai username or password {% endcomment %}
                     {% for message in messages  %}
                     <p id="message" class="text-center text-muted mt-5 mb-0">
                       {{message}}
@@ -47,8 +41,8 @@
                     {% endfor %}
     
                     <div class="d-flex justify-content-end pt-3">
-                      <button type="button" class="btn btn-light btn-lg">Reset all</button>
-                      <button type="submit" class="btn btn-warning btn-lg ms-2">Login</button>
+                      <button type="reset" class="btn btn-light btn-lg">Làm mới</button>
+                      <button type="submit" class="btn btn-warning btn-lg ms-2">Đăng nhập</button>
                     </div>
                   </form>
                   

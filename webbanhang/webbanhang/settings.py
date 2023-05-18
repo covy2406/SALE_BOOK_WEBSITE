@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'webbanhang.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'webbookdjango',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '1010',
     }
 }
 
@@ -128,4 +132,4 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'app/static/images')
-MEDIA_URL = '/images/'
+MEDIA_URL = '/'

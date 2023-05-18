@@ -1,0 +1,25 @@
+{% extends 'app/base.html' %} {% load static %} {% block bookall %}
+<div class="row" style="    margin-top: 20px;margin-left: 148px;font-family: 'Roboto';font-size: 23px;">
+    <p><span> Danh Mục Sản Phẩm: </span> <span style="font-style: italic; font-weight: bold;">{{CategoryName}}</span></p>
+</div>
+<table style="margin-bottom: 70px; margin-left: 130px; text-align: center; margin-right: 170px; margin-top: 10px;">
+    <td>
+        <div class="row d-flex align-items-stretch" style="width: 100%; margin-left: 5px!important">
+            {% for book in books %}
+            <div class="col-sm-2 mb-4 col-hover">
+                <div class="box-element product">
+                    <a href="{% url 'detail'%}?Id={{book.Id}}" style="color: rgb(0, 0, 0); text-decoration: none">
+                        <img class="thumbnail img-fluid" src="../static/images/{{book.Image}}" style="height: 250px">
+                        <h6 class="card-text" style="line-height: 1;max-height: 1em;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; margin-top: 10px; height: 40px;">{{book.Name}}</h6>
+                        <h6 style="font-family: 'Arial Narrow', sans-serif;font-size: 18px; height: 40px; margin-top: 10px">Tác giả: {{book.Author}}</h6>
+                        <h6 style="color: red">$ {{book.Price | floatformat:3}}</h6>
+                    </a>
+                    <form method="POST" action='{% url "addbookcart" %}?Id={{book.Id}}'>{% csrf_token %}
+                        <button type="submit"class="btn btn-outline-success add-btn update-cart">Thêm vào giỏ hàng</button>
+                    </form>                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </td>
+</table>
+{% endblock bookall %}
